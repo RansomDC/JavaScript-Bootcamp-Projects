@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>P9CS</title>
+        <link rel="stylesheet" type="text/css" href="./CSS/main.css">
+    </head>
+    <body>
+        <!--Slideshow Container-->
+        <div class="slideshow-container">
+            
+            <!--Full-width images with number-->
+            <!--Image 1-->
+            <div class="mySlides fade">
+                <div class="numbertext">1/3</div>
+                <img src="./img/island.jpg" style="width: 100%">
+            </div>
+
+            <!--Image 2-->
+            <div class="mySlides fade">
+                <div class="numbertext">2/3</div>
+                <img src="./img/river.jpg" style="width: 100%">
+            </div>
+
+            <!--Image 3-->
+            <div class="mySlides fade">
+                <div class="numbertext">3/3</div>
+                <img src="./img/snow.jpg" style="width: 100%">
+            </div>
+
+            <!--Next and Previous Buttons-->
+            <a class="prev" onclick="changeSlides(-1)">&#10094;</a>
+            <a class="next" onclick="changeSlides(1)">&#10095;</a>
+        </div>
+        <br>
+        
+        <!--Dots and Circles-->
+        <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+
+
+        <p>How many seconds would you like to set your alarm for?</p>
+        <input id="seconds" value="30"/>
+        <button onclick="countDown()">Click here</button>
+        <p id="timer"></p>
+
+
+        <script src="./JS/main.js"></script>
+    </body>
+</html>
