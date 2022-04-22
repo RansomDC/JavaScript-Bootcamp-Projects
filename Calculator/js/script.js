@@ -38,7 +38,7 @@ function Handle_Operator(Next_Operator) {
     } else if (operator) {
         const Value_Now = First_Operand || 0;
         let result = Perform_Calculation[operator](Value_Now, Value_of_Input);
-        result = Number(result).toFixed(0);
+        result = Number(result).toFixed(9);
         result = (result *1).toString();
         Calculator.Display_Value = parseFloat(result);
         Calculator.First_Operand = parseFloat(result);
@@ -83,6 +83,13 @@ keys. addEventListener('click', (event) => {
         Update_Display();
         return
     }
+
+    if (target.classList.contains('decimal')) {
+        Input_Decimal(target.value);
+        Update_Display();
+        return;
+    }
+
     //ensures that AC clears the number from the Calculator
     if (target.classList.contains('all-clear')) {
         Calculator_Reset();
