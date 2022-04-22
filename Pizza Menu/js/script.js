@@ -1,93 +1,55 @@
-//Creates a object to keep track of values
-const Calculator = {
-    Display_Value: '0',
-    First_Operand: null,
-    Wait_second_Operand: false,
-    operator: null,
+function getReceipt() {
+    let text1 = "<h3>You Ordered: </h3>";
+    letrunningTotal = 0;
+    let sizeTotal = 0;
+    let sizeArray = document.getElementsByClassName("size");
+    for (let i = 0; i < sizeArray.length; i++) {
+        if (sizeArray[i].checked) {
+            var selectedSize = sizeArray[i].value;
+            text1 = text1 + selectedSize + "<br>"
+        }
+    }
+    if (selectedSize === "Palm Sized Pizza") {
+        sizeTotal = 4;
+    } else if (selectedSize === "Personal Pizza") {
+        sizeTotal = 6;
+    } else if (selectedSize === "Small Pizza") {
+        sizeTotal = 8;
+    } else if (selectedSize === "Medium Pizza") {
+        sizeTotal = 10;
+    } else if (selectedSize === "Large Pizza") {
+        sizeTotal = 14;
+    }
+    runningTotal = sizeTotal;
+    console.log(selectedSize + " = $" + sizeTotal + ".00");
+    console.log("size text1: " + text1);
+    console.log("subtotal: $" + runningTotal + ".00");
+    getTopping(runningTotal, text1);
 };
 
-//this modifies values each time a button is clicked
-function Input_Digit(digit) {
-    const { Display_Value, Wait_second_Operand } = Calculator;
-    if (Wait_second_Operand === true) {
-        Calculator.Display_Value = digit;
-        Calculator.Wait_second_Operand = false;
+
+function getTopping(runningTotal, text1) {
+    let toppingTotal = 0;
+    let selectedTopping = [];
+    let toppingArray = document.getElementsByClassName("toppings");
+    for (let j = 0; j < toppingArray.length; j++) {                                 //added .length to toppingArray
+        if (toppingArray[j].checked) {
+            selectedTopping.push(toppingArray[j].value);
+            console.log("selected topping item: (" + toppingArray[j].value + ")");
+            text1 = text1 + toppingArray[j].value + "<br>";
+        }
+    }
+    let toppingCount = selectedTopping.length;
+    if (toppingCount > 1) {
+        toppingTotal = (toppingCount - 1);
     } else {
-        Calculator.Display_Value = Display_Value === '0' ? digit : Display_Value + digit;
+        toppingTotal = 0;
     }
+    runningTotal = (runningTotal + toppingTotal);
+    console.log("total selected topping items: " + toppingCount);
+    console.log(toppingCount + " topping - 1 free topping = $" + toppingTotal + ".00");        //removed + between topping = " and "$"
+    console.log("topping: " + text1);                                                       //removed text1 from "topping text1: "
+    console.log("Purchase Total = $" + runningTotal + ".00");                           // removed concat between "Purchase Total =  " and "$"
+    document.getElementById("showText").innerHTML = text1;
+    document.getElementById("totalPrice").innerHTML = "<h3>Total: <strong>$" + runningTotal + ".00" + "</strong></h3>";
 }
-
-//This function manages decimal points
-function Input_Decimal(dot) {
-    if (Calculator.Wait_second_Operand === true) return;
-    if (!Calculator.Display_Value.includes(dot)) {
-        Calculator.Display_Value += dot;
-    }
-}
-
-//This function manages operators
-function Handle_Operator(Next_Operator) {
-    const { First_Operand, Display_Value, operator } = Calculator
-    const Value_of_Input = parseFloat(Display_Value);
-    if (operator && Calculator.Wait_second_Operand) {
-        Calculator.operator = Next_Operator;
-        return;
-    }
-    if (First_Operand == null) {
-        Calculator.First_Operand = Value_of_Input;
-    } else if (operator) {
-        const Value_Now = First_Operand || 0;
-        let result = Perform_Calculation[operator](Value_Now, Value_of_Input);
-        result = Number(result).toFixed(0);
-        result = (result *1).toString();
-        Calculator.Display_Value = parseFloat(result);
-        Calculator.First_Operand = parseFloat(result);
-    }
-    Calculator.Wait_second_Operand = true;
-    Calculator.operator = Next_Operator;
-}
-
-const Perform_Calculation = {
-    '/': (First_Operand, Second_Operand) => First_Operand / Second_Operand,
-    '*': (First_Operand, Second_Operand) => First_Operand * Second_Operand,
-    '+': (First_Operand, Second_Operand) => First_Operand + Second_Operand,
-    '-': (First_Operand, Second_Operand) => First_Operand - Second_Operand,
-    '=': (First_Operand, Second_Operand) => Second_Operand
-};
-
-//Resets all varaible for the next use of the calculator.
-function Calculator_Reset() {
-    Calculator.Display_Value = '0';
-    Calculator.First_Operand = null;
-    Calculator.Wait_second_Operand = false;
-    Calculator.operator = null;
-}
-
-//this function updates the screen with tthe contents of Display_Value
-function Update_Display() {
-    const display = document.querySelector('.calculator-screen');
-    display.value = Calculator.Display_Value;
-}
-
-Update_Display();
-
-const keys = document.querySelector('.calculator-keys');
-keys. addEventListener('click', (event) => {
-    const {target } = event;
-    if (!target.matches('button')) {
-        return;
-    }
-    if (target.classList.contains('operator')) {
-        Handle_Operator(target.value);
-        Update_Display();
-        return
-    }
-    //ensures that AC clears the number from the Calculator
-    if (target.classList.contains('all-clear')) {
-        Calculator_Reset();
-        Update_Display();
-        return;
-    }
-    Input_Digit(target.value);
-    Update_Display();
-})
