@@ -1,61 +1,48 @@
-
-
-body {
-    background-color: darkslategray;
-}
-
 * {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 
 }
 
+body {
+    background-color: darkslategray;
+}
+
 #menuBG {
-    width: 400px;
-    height: 470px;
-    margin: 10px auto;
-    color: lightgray;
+    height: 50%;
+    width: 50%;
+    margin: 0 auto;
+    border: 3px solid lightgrey;
+    border-radius: 3px;
+    color: lightgrey;
+}
+
+.menu-container {
+    display: flex;
+    justify-content: center;
+}
+
+.menu {
+    margin: 0 10px;
 }
 
 #frmMenu {
-    width: 400px;
-    height: 200px;
-}
-
-#totalPrice {
-    width: 200px;
-    height: 190px;
+    width: 50%;
+    height: 50%;
     margin: 0 auto;
-    float: right;
 }
 
-.left {
-    width: 200px;
-    height: 200px;
-    float: left;
-}
-
-.right {
-    width: 200px;
-    height: 200px;
-    float: left;
-}
-
-#showText {
-    width: 200px;
-    height: 190px;
-    margin: 0px auto;
-    float: left;
+.headerBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #cart {
-    top: 0;
-    margin: 0px auto;
-    width: 400px;
-    height: 200px;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
 }
 
-#btnOrder {
-    margin: 10px 0px 0px 100px;
-    width: 100px;
-    height: 40px;
+#cart div {
+    margin: 30px 50px;
 }
