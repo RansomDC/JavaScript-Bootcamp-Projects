@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="./practice2.css">
+</head>
+<body>
+    
+    <p id="XML_example"></p>
+
+    <script>
+        let XML_Parser, XML_Document;
+
+        //creates a text string
+        let vessel = "<boat>" + "<type>Schooner</type>" + "<name>Adventuress</name>" + "<yearbuilt>1913</yearbuilt>" + "</boat>";
+         
+        //creates an XML DOM parser
+        XML_Parser = new DOMParser();
+         
+        //creates a new XML DOM object using the text string
+        XML_Document = XML_Parser.parseFromString(vessel,"text/xml")
+         
+        document.getElementById("XML_example").innerHTML =
+        XML_Document.getElementsByTagName("name")[0].childNodes[0].nodeValue;
+        </script>
+        
+
+
+</body>
+</html>

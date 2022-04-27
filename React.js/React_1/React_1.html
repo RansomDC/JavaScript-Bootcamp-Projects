@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>React-1</title>
+        <script src="../react.js"></script>
+        <script src="../react-dom.js"></script>
+    </head>
+    <body>
+
+        <div id="My_React_Code"></div>
+        <script>
+            //This creates a class with a single function (render())
+            var Counter = React.createClass({
+                render: function() {    //class function declaration
+                    var time_Passed = Math.round(this.props.time_Passed / 100);
+                    var seconds_Passed = time_Passed / 10 + (time_Passed % 10 ? '' : '.0' );
+                    var text = 'My React code started running ' +
+                        seconds_Passed + ' seconds ago!';
+                    return React.DOM.p(null, text);         //like calling React.createelement creating a <p>
+                }
+            });
+
+            //Sets a variable which calls for the creation of a factory (The factory in this case is Counter)
+            var counter_Factory = React.createFactory(Counter);
+
+            //Get's the current time
+            var start_Counting = new Date().getTime();
+
+            //setInterval is a function that has two arguments: A function and a time. This instance of
+            //setInterval is declaring its own function and then saying to do it every 50 milisecionds.
+            //The function renders onto the screen the counter factory's output, with the information from Counter
+            setInterval(function() {
+                ReactDOM.render(
+                    counter_Factory({time_Passed: new Date().getTime() - start_Counting}),
+                    document.getElementById('My_React_Code')
+                );
+            }, 50);
+
+            //ReactDOM.render(element, document.getElementById('root'));
+        </script>
+
+    </body>
+</html>
